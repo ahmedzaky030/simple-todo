@@ -1,0 +1,30 @@
+<div class="add-todo-form text-center">
+    <h1>
+        <div class="form-group">
+            <input type="text" placeholder="Type your todo....." ref-todo>
+            <hr>
+            <button (click)="addTodo($event, todo)" class="btn btn-primary">Create</button>
+        </div>
+    </h1>
+</div>
+<div class="todo-list text-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+    <div class="row" *ngFor="let todo of todos">
+        <div class="col-md-1 ">
+            <input type="checkbox" [class.hidden]="selectedTodo && selectedTodo == todo" [checked]="todo.isCompleted" />
+            <input type="checkbox" [class.hidden]="!(selectedTodo && selectedTodo == todo)" [(ngModel)]="todo.isCompleted" />
+        </div>
+        <div class="col-md-7 ">
+            <span [class.hidden]="selectedTodo && selectedTodo == todo"> {{todo.text}}</span>
+            <input [class.hidden]="!(selectedTodo && selectedTodo == todo)" [(ngModel)]="todo.text" />
+        </div>
+        <div class="col-md-4 btns ">
+            <input type="button" class="btn btn-danger" value="Delete" (click)="deleteTodo(todo._id)" [class.hidden]="selectedTodo != null">
+            <input type="button" class="btn btn-default" value="Edit" (click)="editTodo(todo)" [class.hidden]="selectedTodo != null ">
+            <input type="button" class="btn btn-default" value="Update" (click)="updateTodo(todo)" [class.hidden]="selectedTodo == null">
+        </div>
+    </div>
+</div>
+    <div class="col-md-3"></div>
+</div>
